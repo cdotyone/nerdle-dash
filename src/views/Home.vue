@@ -1,26 +1,36 @@
 <template>
   <div class="home h-100" ref="main">
     <div class="row h-100">
-      <div class="col-8">
-        <youtube-media v-if="isMounted && videos.length>current" :video-id="videos[current]"
+      <div class="col-9">
+        <youtube-media v-if="isMounted && videos.length>current" :video-id="videos[current].videoId"
                        :player-width="'100%'"
                        :player-height="height"
                        :player-vars="{ autoplay: 1 }" :mute="true">
         </youtube-media>
-      </div>
-      <div class="col-4 p-0" ref="right">
-        <div class="w-100" v-for="(video,index) in videos" :key="video">
-          <div class="right-vid-tool" v-if="video && index!=current" @click="current=index" :style="toolStyle()">
-            <i class="fas fa-chevron-left pl-1"></i>
+        <div class="w-100 video-bar scroll-horz" :style="{height:miniHeight+'px'}">
+          <div class="" :style="{height:miniHeight+'px',width:(videos.length*miniWidth)+'px'}">
+            <div v-for="(video,index) in videos" :key="video">
+              <div class="video-bar-video" v-if="video && index!=current">
+                <div class="video-bar-tool w-100" @click="current=index">
+                  <i class="fas fa-chevron-up pl-1"></i>
+                  <i class="fas fa-comment pl-1 ml-2" :class="{'active':index===currentChat}" @click.stop="onChatChange(index)"></i>
+                  <span class="pl-3 d-inline-block">{{video.title}}</span>
+                </div>
+                <youtube-media v-if="isMounted" :video-id="video.videoId"
+                               :player-width="miniWidth"
+                               :player-height="miniHeight"
+                               :player-vars="{ autoplay: 1 }" :mute="true">
+                </youtube-media>
+              </div>
+            </div>
           </div>
-          <youtube-media v-if="isMounted && video && index!=current" :video-id="video" class="right-vid"
-                         :player-width="rightWidth-21"
-                         :player-height="miniHeight()"
-                         :player-vars="{ autoplay: 1 }" :mute="true">
-          </youtube-media>
         </div>
       </div>
+      <div class="col-3 p-0" ref="right" key="'chat'+currentChat">
+        <iframe allowfullscreen="" frameborder="0" :height="height+miniHeight" :src="'https://www.youtube.com/live_chat?v='+videos[currentChat].videoId+'&embed_domain=localhost'" width="100%"></iframe><br />
+      </div>
     </div>
+    <div></div>
   </div>
 </template>
 
@@ -49,25 +59,27 @@ export default {
   data: function () {
     return {
       videoId: "",
-      videos: [],
       height: 480,
       width: 360,
+      chatHeight: 200,
+      miniWidth:300,
+      miniHeight:200,
       rightWidth:200,
       isMounted : false,
-      current: 0
+      current: 0,
+      currentChat: 0,
+      videoList: [
+        {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM"},
+        {src:"https://www.youtube.com/watch?v=CQJInT3-_-s",type:"youtube",title:"Sapphire CAM"},
+        {src:"https://www.youtube.com/watch?v=ZCKpMjrlWfY",type:"youtube",title:"Lab CAM"},
+        {src:"https://www.youtube.com/watch?v=QsfTL-Wr9LE",type:"youtube",title:"Predator CAM"},
+        {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"}
+      ]
     }
-  },
-  created() {
-    let videos = this.videos;
-    videos.push(getIdFromURL("https://www.youtube.com/watch?v=Ky5l9ZxsG9M"))
-    videos.push(getIdFromURL("https://www.youtube.com/watch?v=CQJInT3-_-s"))
-    videos.push(getIdFromURL("https://www.youtube.com/watch?v=ZCKpMjrlWfY"))
-    videos.push(getIdFromURL("https://www.youtube.com/watch?v=QsfTL-Wr9LE"))
-    videos.push(getIdFromURL("https://www.youtube.com/watch?v=n5ozYnVQahE"))
   },
   mounted() {
     this.$nextTick(()=>{
-      this.height = this.$refs.main.clientHeight;
+      this.height = this.$refs.main.clientHeight - this.chatHeight;
       this.width = this.$refs.main.clientWidth;
       this.rightWidth = this.$refs.right.clientWidth;
       console.log(this.rightWidth);
@@ -75,23 +87,26 @@ export default {
     });
   },
   methods: {
-    toolStyle() {
-      return {height:this.miniHeight(0)+"px" };
-    },
-    miniHeight(ofs) {
-      if(ofs===undefined) ofs=4;
-
-      let maxHeight = this.height;
-      let numVids = this.videos.length-1;
-      let h= parseInt(maxHeight/numVids)-ofs;
-
-      let h2=h;
-      while(h2*numVids>maxHeight && h2>0) {
-        h2--;
+    onChatChange(index) {
+      if(index===this.currentChat) {
+        this.currentChat = this.current;
+      } else {
+        this.currentChat = index;
       }
-      if(h2) h=h2;
+    }
+  },
+  computed: {
+    videos() {
+      let list = [];
+      let videoList = this.videoList;
+      for(let i=0;i<videoList.length;i++) {
+        if(videoList[i].type==='youtube'){
+          videoList[i].videoId =  getIdFromURL(videoList[i].src);
+        }
+        list.push(videoList[i]);
+      }
 
-      return h;
+      return list;
     }
   }
 }
@@ -99,25 +114,30 @@ export default {
 </script>
 
 <style lang="scss">
-.right-vid {
-  margin: 0;
-  padding:0;
-  iframe {
-    margin: 0;
-    padding:0;
-  }
-  background-color: black;
-  float: right;
-}
-.right-vid-tool {
-  height: 100%;
-  width: 20px;
-  color: white;
-  background-color: #000000;
-  border-top:solid 1px #888;
-  float: left;
-}
 iframe {
   border: none;
+}
+
+.video-bar {
+  width: 100%;
+}
+.scroll-horz {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.video-bar-tool {
+  height: .8rem;
+  position: absolute;
+  z-index: 100;
+  margin-top: -.45rem;
+  color: white;
+}
+.video-bar-video {
+  float: left;
+  display: inline-block;
+}
+
+.fa-comment.active {
+  color: yellow;
 }
 </style>
