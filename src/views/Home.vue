@@ -5,11 +5,11 @@
         <youtube-media v-if="isMounted && videos.length>current" :video-id="videos[current].videoId"
                        :player-width="'100%'"
                        :player-height="height"
-                       :player-vars="{ autoplay: 1 }" :mute="true">
+                       :player-vars="{ autoplay: 1, origin:origin, enablejsapi:1, showinfo:1 }" :mute="true">
         </youtube-media>
         <div class="w-100 video-bar scroll-horz" :style="{height:miniHeight+'px'}">
           <div class="" :style="{height:miniHeight+'px',width:(videos.length*miniWidth)+'px'}">
-            <div v-for="(video,index) in videos" :key="video">
+            <div v-for="(video,index) in videos" :key="video.videoId">
               <div class="video-bar-video" v-if="video && index!=current">
                 <div class="video-bar-tool w-100" @click="current=index">
                   <i class="fas fa-chevron-up pl-1"></i>
@@ -19,7 +19,7 @@
                 <youtube-media v-if="isMounted" :video-id="video.videoId"
                                :player-width="miniWidth"
                                :player-height="miniHeight"
-                               :player-vars="{ autoplay: 1 }" :mute="true">
+                               :player-vars="{ autoplay: 1, origin:origin, enablejsapi:1 }" :mute="true">
                 </youtube-media>
               </div>
             </div>
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="col-3 p-0" ref="right" key="'chat'+currentChat">
-        <iframe allowfullscreen="" frameborder="0" :height="height+miniHeight" :src="'https://www.youtube.com/live_chat?v='+videos[currentChat].videoId+'&embed_domain=localhost'" width="100%"></iframe><br />
+        <iframe allowfullscreen="" frameborder="0" :height="height+miniHeight" :src="getChatUrl(videos[currentChat].videoId)" width="100%"></iframe><br />
       </div>
     </div>
     <div></div>
@@ -70,9 +70,9 @@ export default {
       currentChat: 0,
       videoList: [
         {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM"},
-        {src:"https://www.youtube.com/watch?v=CQJInT3-_-s",type:"youtube",title:"Sapphire CAM"},
-        {src:"https://www.youtube.com/watch?v=ZCKpMjrlWfY",type:"youtube",title:"Lab CAM"},
-        {src:"https://www.youtube.com/watch?v=QsfTL-Wr9LE",type:"youtube",title:"Predator CAM"},
+        {src:"https://www.youtube.com/watch?v=9NduKCos5s8",type:"youtube",title:"Sapphire CAM"},
+        {src:"https://www.youtube.com/watch?v=G_u7HPZX_8A",type:"youtube",title:"Lab CAM"},
+        {src:"https://www.youtube.com/watch?v=Ss_XUaLEp1Y",type:"youtube",title:"Predator CAM"},
         {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"}
       ]
     }
@@ -85,6 +85,8 @@ export default {
       console.log(this.rightWidth);
       this.isMounted = true;
     });
+
+    //https://www.youtube.com/live_stats?v=Ky5l9ZxsG9M
   },
   methods: {
     onChatChange(index) {
@@ -93,6 +95,9 @@ export default {
       } else {
         this.currentChat = index;
       }
+    },
+    getChatUrl(id) {
+      return window.location.protocol + '//www.youtube.com/live_chat?v='+id+'&embed_domain=' + this.host;
     }
   },
   computed: {
@@ -107,6 +112,12 @@ export default {
       }
 
       return list;
+    },
+    host() {
+      return window.location.host.split(':')[0];
+    },
+    origin() {
+      return window.location.href;
     }
   }
 }
