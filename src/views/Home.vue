@@ -70,7 +70,7 @@ export default {
       currentChat: 0,
       videoList: [
         {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM"},
-        {src:"https://www.youtube.com/watch?v=9NduKCos5s8",type:"youtube",title:"Sapphire CAM"},
+        {src:"https://www.youtube.com/watch?v=qNyEwBW0ZJA",type:"youtube",title:"Sapphire CAM"},
         {src:"https://www.youtube.com/watch?v=G_u7HPZX_8A",type:"youtube",title:"Lab CAM"},
         {src:"https://www.youtube.com/watch?v=Ss_XUaLEp1Y",type:"youtube",title:"Predator CAM"},
         {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"}
