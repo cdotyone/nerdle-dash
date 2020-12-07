@@ -71,9 +71,10 @@ export default {
       videoList: [
         {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM"},
         {src:"https://www.youtube.com/watch?v=CQJInT3-_-s",type:"youtube",title:"Sapphire CAM"},
-        {src:"https://www.youtube.com/watch?v=ZCKpMjrlWfY",type:"youtube",title:"Lab CAM"},
-        {src:"https://www.youtube.com/watch?v=QsfTL-Wr9LE",type:"youtube",title:"Predator CAM"},
-        {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"}
+        {src:"https://www.youtube.com/watch?v=am2kw1TCNAk",type:"youtube",title:"Lab CAM"},
+        {src:"https://www.youtube.com/watch?v=myae7p1Yntg",type:"youtube",title:"Predator CAM"},
+        {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"},
+        {src:"https://www.youtube.com/watch?v=agmFDeP5u_w",type:"youtube",title:"Pearl Beach Cam"}
       ]
     }
   },
