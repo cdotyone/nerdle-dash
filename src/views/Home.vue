@@ -74,7 +74,8 @@ export default {
         {src:"https://www.youtube.com/watch?v=am2kw1TCNAk",type:"youtube",title:"Lab CAM"},
         {src:"https://www.youtube.com/watch?v=myae7p1Yntg",type:"youtube",title:"Predator CAM"},
         {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"},
-        {src:"https://www.youtube.com/watch?v=agmFDeP5u_w",type:"youtube",title:"Pearl Beach Cam"}
+        {src:"https://www.youtube.com/watch?v=agmFDeP5u_w",type:"youtube",title:"Pearl Beach Cam"},
+        {src:"https://youtu.be/nf83yzzme2I",type:"youtube",title:"SpaceX"},
       ]
     }
   },
