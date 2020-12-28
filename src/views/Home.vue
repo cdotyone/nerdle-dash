@@ -1,36 +1,41 @@
 <template>
   <div class="home h-100" ref="main">
     <div class="row h-100">
-      <div class="col-9">
+      <div class="col-9" ref="mainVideo">
         <youtube-media v-if="isMounted && videos.length>current" :video-id="videos[current].videoId"
                        :player-width="'100%'"
                        :player-height="height"
                        :player-vars="{ autoplay: 1, origin:origin, enablejsapi:1, showinfo:1 }" :mute="true">
         </youtube-media>
-        <div class="w-100 video-bar scroll-horz" :style="{height:miniHeight+'px'}">
-          <div class="" :style="{height:miniHeight+'px',width:(videos.length*miniWidth)+'px'}">
-            <div v-for="(video,index) in videos" :key="video.videoId">
-              <div class="video-bar-video" v-if="video && index!=current">
-                <div class="video-bar-tool w-100" @click="current=index">
-                  <i class="fas fa-chevron-up pl-1"></i>
-                  <i class="fas fa-comment pl-1 ml-2" :class="{'active':index===currentChat}" @click.stop="onChatChange(index)"></i>
-                  <span class="pl-3 d-inline-block">{{video.title}}</span>
-                </div>
-                <youtube-media v-if="isMounted" :video-id="video.videoId"
-                               :player-width="miniWidth"
-                               :player-height="miniHeight"
-                               :player-vars="{ autoplay: 1, origin:origin, enablejsapi:1 }" :mute="true">
-                </youtube-media>
+      </div>
+      <div class="col-3 p-0" ref="right" key="'chat'+currentChat">
+        <iframe allowfullscreen="" frameborder="0" :height="height" :src="getChatUrl(videos[currentChat].videoId)" width="100%"></iframe><br />
+      </div>
+    </div>
+    <div class="row video-bar-row">
+      <div class="col">
+      <div class="w-100 video-bar" :style="{height:miniHeight+'px'}">
+        <div class="" :style="{height:miniHeight+'px',width:(videos.length*miniWidth)+'px'}">
+          <div v-for="(video,index) in videos" :key="video.videoId">
+            <div class="video-bar-video" v-if="video && index!=current">
+              <div class="video-bar-tool w-100" @click="current=index">
+                <i class="fas fa-chevron-up pl-1"></i>
+                <i class="fas fa-comment pl-1 ml-2" :class="{'active':index===currentChat}" @click.stop="onChatChange(index)"></i>
+                <span class="pl-3 d-inline-block">{{video.title}}</span>
+              </div>
+              <div class="video-mini">
+              <youtube-media v-if="isMounted" :video-id="video.videoId"
+                             :player-width="miniWidth"
+                             :player-height="miniHeight"
+                             :player-vars="{ autoplay: 1, origin:origin, enablejsapi:1 }" :mute="true">
+              </youtube-media>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-3 p-0" ref="right" key="'chat'+currentChat">
-        <iframe allowfullscreen="" frameborder="0" :height="height+miniHeight" :src="getChatUrl(videos[currentChat].videoId)" width="100%"></iframe><br />
-      </div>
     </div>
-    <div></div>
+    </div>
   </div>
 </template>
 
@@ -62,24 +67,39 @@ export default {
       height: 480,
       width: 360,
       chatHeight: 200,
-      miniWidth:300,
-      miniHeight:200,
+      miniWidth:280,
+      miniHeight:180,
       rightWidth:200,
       isMounted : false,
       current: 0,
       currentChat: 0,
       videoList: [
-        {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM"},
-        {src:"https://www.youtube.com/watch?v=qNyEwBW0ZJA",type:"youtube",title:"Sapphire CAM"},
-        {src:"https://www.youtube.com/watch?v=am2kw1TCNAk",type:"youtube",title:"Lab CAM"},
-        {src:"https://www.youtube.com/watch?v=myae7p1Yntg",type:"youtube",title:"Predator CAM"},
-        {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM"},
-        {src:"https://www.youtube.com/watch?v=agmFDeP5u_w",type:"youtube",title:"Pearl Beach Cam"},
-        {src:"https://youtu.be/nf83yzzme2I",type:"youtube",title:"SpaceX"},
+        {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM",vq:2160},
+        {src:"https://www.youtube.com/watch?v=UAIfOJyGb-Y",type:"youtube",title:"Sapphire CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=K5kiBsvwxCU",type:"youtube",title:"Lab CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=GVmJYAIuOtA",type:"youtube",title:"Predator CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=agmFDeP5u_w",type:"youtube",title:"Pearl Beach Cam",vq:1080},
+        {src:"https://www.youtube.com/watch?v=K_imZ-AucMU",type:"youtube",title:"Stealth Cam",vq:1080}
       ]
     }
   },
   mounted() {
+
+    setInterval(()=>{
+      if(!this.videoList[this.current].vq) return;
+      let iframe = this.$refs.mainVideo.getElementsByTagName("IFRAME");
+      if(iframe.length>0) {
+        iframe=iframe[0];
+        if(iframe.src.indexOf('&vq=')>0) {
+          return;
+        } else {
+          iframe.src=iframe.src+'&vq='+this.videoList[this.current].vq;
+        }
+
+      }
+    },1000);
+
     this.$nextTick(()=>{
       this.height = this.$refs.main.clientHeight - this.chatHeight;
       this.width = this.$refs.main.clientWidth;
@@ -139,10 +159,7 @@ iframe {
   overflow-y: hidden;
 }
 .video-bar-tool {
-  height: .8rem;
-  position: absolute;
-  z-index: 100;
-  margin-top: -.45rem;
+  height: 1rem;
   color: white;
 }
 .video-bar-video {
@@ -150,7 +167,18 @@ iframe {
   display: inline-block;
 }
 
+.video-bar-row {
+  position: absolute;
+  bottom:0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .fa-comment.active {
   color: yellow;
+}
+
+.video-mini {
+  padding-top: .2rem;
 }
 </style>
