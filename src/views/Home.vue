@@ -74,13 +74,13 @@ export default {
       current: 0,
       currentChat: 0,
       videoList: [
-        {src:"https://www.youtube.com/watch?v=Ky5l9ZxsG9M",type:"youtube",title:"Nerdle CAM",vq:2160},
-        {src:"https://www.youtube.com/watch?v=DqKf-GfQ6CA&t",type:"youtube",title:"Sapphire CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=sAhDLJEEGhE",type:"youtube",title:"Lab CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=tBZUHgpCdkM",type:"youtube",title:"Predator CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=n5ozYnVQahE",type:"youtube",title:"Sentinel CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=agmFDeP5u_w",type:"youtube",title:"Pearl Beach Cam",vq:1080},
-        {src:"https://www.youtube.com/watch?v=Z72Au8Px7mM",type:"youtube",title:"Launch Pad Cam",vq:1080}
+        {src:"https://www.youtube.com/watch?v=sTA0GTgFn5E",type:"youtube",title:"Nerdle CAM",vq:2160},
+        {src:"https://www.youtube.com/watch?v=rzpul29uGI8",type:"youtube",title:"Sapphire CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=_V5S0KJrmKc",type:"youtube",title:"Lab CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=QC31zwimnNc",type:"youtube",title:"Predator CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=richjW1jj20",type:"youtube",title:"Sentinel CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=ZBXCYLlaGJY",type:"youtube",title:"Pearl Beach Cam",vq:1080},
+        {src:"https://www.youtube.com/watch?v=qCbgoqMcirI",type:"youtube",title:"Launch Pad Cam",vq:1080}
       ]
     }
   },
