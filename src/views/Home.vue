@@ -75,11 +75,10 @@ export default {
       currentChat: 0,
       videoList: [
         {src:"https://www.youtube.com/watch?v=sTA0GTgFn5E",type:"youtube",title:"Nerdle CAM",vq:2160},
-        {src:"https://www.youtube.com/watch?v=rzpul29uGI8",type:"youtube",title:"Sapphire CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=_V5S0KJrmKc",type:"youtube",title:"Lab CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=eVDUmtGyBd4",type:"youtube",title:"Sapphire CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=tYZaaz8UbRE",type:"youtube",title:"Lab CAM",vq:1080},
         {src:"https://www.youtube.com/watch?v=QC31zwimnNc",type:"youtube",title:"Predator CAM",vq:1080},
         {src:"https://www.youtube.com/watch?v=richjW1jj20",type:"youtube",title:"Sentinel CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=ZBXCYLlaGJY",type:"youtube",title:"Pearl Beach Cam",vq:1080},
         {src:"https://www.youtube.com/watch?v=qCbgoqMcirI",type:"youtube",title:"Launch Pad Cam",vq:1080}
       ]
     }
