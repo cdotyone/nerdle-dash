@@ -78,8 +78,8 @@ export default {
         {src:"https://www.youtube.com/watch?v=eVDUmtGyBd4",type:"youtube",title:"Sapphire CAM",vq:1080},
         {src:"https://www.youtube.com/watch?v=tYZaaz8UbRE",type:"youtube",title:"Lab CAM",vq:1080},
         {src:"https://www.youtube.com/watch?v=QC31zwimnNc",type:"youtube",title:"Predator CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=richjW1jj20",type:"youtube",title:"Sentinel CAM",vq:1080},
-        {src:"https://www.youtube.com/watch?v=qCbgoqMcirI",type:"youtube",title:"Launch Pad Cam",vq:1080}
+        {src:"https://www.youtube.com/watch?v=_og17JYSMcQ",type:"youtube",title:"Sentinel CAM",vq:1080},
+        {src:"https://www.youtube.com/watch?v=sMC5KonXCfg",type:"youtube",title:"Launch Pad Cam",vq:1080}
       ]
     }
   },
