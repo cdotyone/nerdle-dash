@@ -42,8 +42,9 @@ jobs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn install         
     - name: Build
+      run: yarn build
+    - name: Release
       run: |
-        yarn build
         rm ./docs -R
         mv dist docs
         git comnmit -a -m "build: update site content"
