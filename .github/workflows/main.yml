@@ -24,6 +24,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: 'Commit Lint'
+      uses: "cdotyone/github-commit-lint@main"      
     - name: Use Node.js 12.x
       uses: actions/setup-node@v2-beta
     - name: Install Dependencies
