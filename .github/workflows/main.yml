@@ -44,3 +44,7 @@ jobs:
     - name: Build
       run: |
         yarn build
+        rm ./docs -R
+        mv dist docs
+        git comnmit -a -m "build: update site content"
+        
