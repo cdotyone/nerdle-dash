@@ -40,9 +40,12 @@ jobs:
           ${{ runner.os }}-yarn-
     - name: Install Dependencies
       if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: yarn install         
+      run: |
+        yarn install 
     - name: Build
-      run: yarn build
+      run: |
+        npm install vue-cli-service -g
+        yarn build
     - name: Release
       run: |
         rm ./docs -R
