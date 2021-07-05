@@ -34,6 +34,9 @@ jobs:
       run: |
         rm ./docs -R
         mv dist docs
+        git config --global user.email "cdotyone"
+        git config --global user.name "cdotyone"
+        git add .
         git commit -a -m "build: update site content" 
     - name: Conventional Changelog Action
       id: changelog
