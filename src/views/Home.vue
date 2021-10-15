@@ -74,13 +74,14 @@ export default {
       current: 0,
       currentChat: 0,
       videoList: [
-        {src:"https://www.youtube.com/watch?v=sTA0GTgFn5E",type:"youtube",title:"Nerdle",vq:2160},
-        {src:"https://www.youtube.com/watch?v=d4MvdQtlHcA",type:"youtube",title:"Sapphire",vq:1080},
-        {src:"https://www.youtube.com/watch?v=dSVinHzoruI",type:"youtube",title:"Lab",vq:1080},
-        {src:"https://www.youtube.com/watch?v=Nqt-Bxakoko",type:"youtube",title:"Predator",vq:1080},
-        {src:"https://www.youtube.com/watch?v=_og17JYSMcQ",type:"youtube",title:"Sentinel",vq:1080},
-        {src:"https://www.youtube.com/watch?v=sMC5KonXCfg",type:"youtube",title:"Launch Pad",vq:1080},
-        {src:"https://www.youtube.com/watch?v=BELcufzEOZ",type:"youtube",title:"Port Canaveral",vq:1080}
+        {src:"https://www.youtube.com/watch?v=_HZCh2eGWEI",type:"youtube",title:"Nerdle",vq:2160},
+        {src:"https://www.youtube.com/watch?v=7OKb9Rc-etw",type:"youtube",title:"Sapphire",vq:1080},
+        {src:"https://www.youtube.com/watch?v=HGb28t5TWtc",type:"youtube",title:"Lab",vq:1080},
+        {src:"https://www.youtube.com/watch?v=E-EFNn2seTo",type:"youtube",title:"Predator",vq:1080},
+        {src:"https://www.youtube.com/watch?v=zPkIZYw5O98",type:"youtube",title:"Sentinel",vq:1080},
+        {src:"https://www.youtube.com/watch?v=k6fGQZD0K98",type:"youtube",title:"Booster",vq:1080},
+        {src:"https://www.youtube.com/watch?v=5HpgJJ1FwTc",type:"youtube",title:"Rover",vq:1080},
+        {src:"https://www.youtube.com/watch?v=BELcufzEOZ0",type:"youtube",title:"Port Canaveral",vq:1080}
       ]
     }
   },
