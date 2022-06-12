@@ -13,7 +13,37 @@
       </div>
     </div>
     <div class="row video-bar-row">
-      <div class="col">
+      <div class="col-2 filters">
+        <div>Location
+          <div>
+            <select v-model="location">
+              <option value="">All</option>
+              <option value="BC">Boca Chica</option>
+              <option value="port">Port Canaveral</option>
+              <option value="MC">McGregor</option>
+            </select>
+          </div>
+        </div>
+        <div>Channel
+          <div>
+            <select v-model="channel">
+              <option value="">All</option>
+              <option value="LP">LabPadre</option>
+              <option value="NSF">NSF</option>
+            </select>
+          </div>
+        </div>
+        <div class="multi">Multi
+          <div>
+            <select v-model="multi">
+              <option value="">All</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+         </div>
+        </div>
+      </div>
+      <div class="col-10">
       <div class="w-100 video-bar" :style="{height:miniHeight+'px'}">
         <div class="" :style="{height:miniHeight+'px',width:(videos.length*miniWidth)+'px'}">
           <div v-for="(video,index) in videos" :key="video.videoId">
@@ -73,14 +103,21 @@ export default {
       isMounted : false,
       current: 0,
       currentChat: 0,
+      multi:'yes',
+      location:null,
+      channel:null,
       videoList: [
-        {src:"https://www.youtube.com/watch?v=sTA0GTgFn5E",type:"youtube",title:"Nerdle",vq:2160},
-        {src:"https://www.youtube.com/watch?v=d4MvdQtlHcA",type:"youtube",title:"Sapphire",vq:1080},
-        {src:"https://www.youtube.com/watch?v=dSVinHzoruI",type:"youtube",title:"Lab",vq:1080},
-        {src:"https://www.youtube.com/watch?v=Nqt-Bxakoko",type:"youtube",title:"Predator",vq:1080},
-        {src:"https://www.youtube.com/watch?v=_og17JYSMcQ",type:"youtube",title:"Sentinel",vq:1080},
-        {src:"https://www.youtube.com/watch?v=sMC5KonXCfg",type:"youtube",title:"Launch Pad",vq:1080},
-        {src:"https://www.youtube.com/watch?v=BELcufzEOZ",type:"youtube",title:"Port Canaveral",vq:1080}
+        {src:"https://www.youtube.com/watch?v=Lwc1owVFs94",type:"youtube",title:"LP Nerdle",vq:2160, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=w2BQKCnPkIc",type:"youtube",title:"LP MultiPlex",vq:1080, channel:"LP", multi:'yes', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=b-Q0nnROasI",type:"youtube",title:"LP Sapphire",vq:1080, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=wStCstJ-MSQ",type:"youtube",title:"LP Lab",vq:1080, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=uayjPi9BVhg",type:"youtube",title:"LP Raptor Roost",vq:1080, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=EdygcWV2vT8",type:"youtube",title:"LP Rover CAM",vq:1080, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=TdKYvvwJkhQ",type:"youtube",title:"LP Sentinel",vq:1080, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=y3AeNiJSJTo",type:"youtube",title:"LP Port Canaveral",vq:1080, channel:"LP", multi:'no', location:"port"},
+        {src:"https://www.youtube.com/watch?v=mhJRzQsLZGg",type:"youtube",title:"NSF StarBase",vq:1080, channel:"NSF", multi:'yes', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=gnt2wZBg89g",type:"youtube",title:"NSF FleetCAM",vq:1080, channel:"NSF", multi:'no', location:"port"},
+        {src:"https://www.youtube.com/watch?v=cOmmvhDQ2HM",type:"youtube",title:"MSF McGregor",vq:1080, channel:"NSF", multi:'yes', location:"MC"}
       ]
     }
   },
@@ -130,7 +167,11 @@ export default {
         if(videoList[i].type==='youtube'){
           videoList[i].videoId =  getIdFromURL(videoList[i].src);
         }
-        list.push(videoList[i]);
+        let show= true;
+        if(this.multi!==null && videoList[i].multi!==this.multi) show=false;
+        if(this.location!==null && videoList[i].location!==this.location) show=false;
+        if(this.channel!==null && videoList[i].channel!==this.channel) show=false;
+        if(show) list.push(videoList[i]);
       }
 
       return list;
@@ -181,4 +222,18 @@ iframe {
 .video-mini {
   padding-top: .2rem;
 }
+
+.filters {
+  color: white;
+  border-right: #888 1px solid;
+  padding-right: .2rem;
+  padding-left: 1.1rem;
+  //width: 116px;
+  font-size: 10px;
+  select {
+    width: 100%;
+  }
+}
+
+
 </style>
