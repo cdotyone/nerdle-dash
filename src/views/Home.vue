@@ -109,7 +109,7 @@ export default {
       videoList: [
         {src:"https://www.youtube.com/watch?v=Lwc1owVFs94",type:"youtube",title:"LP Nerdle",vq:2160, channel:"LP", multi:'no', location:"BC"},
         {src:"https://www.youtube.com/watch?v=w2BQKCnPkIc",type:"youtube",title:"LP MultiPlex",vq:1080, channel:"LP", multi:'yes', location:"BC"},
-        {src:"https://www.youtube.com/watch?v=b-Q0nnROasI",type:"youtube",title:"LP Sapphire",vq:1080, channel:"LP", multi:'no', location:"BC"},
+        {src:"https://www.youtube.com/watch?v=K0iL6oIHU3U",type:"youtube",title:"LP Sapphire",vq:1080, channel:"LP", multi:'no', location:"BC"},
         {src:"https://www.youtube.com/watch?v=wStCstJ-MSQ",type:"youtube",title:"LP Lab",vq:1080, channel:"LP", multi:'no', location:"BC"},
         {src:"https://www.youtube.com/watch?v=PXpGvSn_T6Y",type:"youtube",title:"LP Raptor Roost",vq:1080, channel:"LP", multi:'no', location:"BC"},
         {src:"https://www.youtube.com/watch?v=EdygcWV2vT8",type:"youtube",title:"LP Rover CAM",vq:1080, channel:"LP", multi:'no', location:"BC"},
